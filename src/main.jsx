@@ -6,10 +6,10 @@ import { Home } from '../components/Home.jsx'
 import { Index } from '../components/Index.jsx'
 // ROUTES
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
- 
-import 'bootstrap/dist/css/bootstrap.css';
-// import 'bootstrap/dist/js/bootstrap.min.js';
-
+// STYLES 
+import '../assets/css/nucleo-icons.css'
+import '../assets/css/nucleo-svg.css'  
+import '../assets/css/material-dashboard.css' 
 
 const router = createBrowserRouter([
   { 
