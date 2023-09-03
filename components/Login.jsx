@@ -11,8 +11,13 @@ export const Login = ()=> {
         name:user,
         password:pass
       }
-      Axios.post('https://localhost:3001/start', dataUser);
-      // console.log(dataUser);
+      Axios.get('http://localhost:3000/login', {d:'1'})
+       .then((res)=>{
+          console.log(res.data[0]);
+       })
+       .catch((err)=>{
+          console.log(err);
+       })
        
     }
     return (
