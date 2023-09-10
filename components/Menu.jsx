@@ -10,7 +10,7 @@ export const Menu = () => {
       <i className="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
         <img src="./favicon.ico" className="navbar-brand-img h-100 mr-2" alt="main_logo"/>
-        <span className="ms-1 font-weight-bold text-white">INTI HOME</span>
+        <span className="ms-1 font-weight-bold text-white p-4">I  N  T  I / H O M E</span>
       </a>
     </div>
     <hr className="horizontal light mt-0 mb-2"/>
@@ -19,10 +19,19 @@ export const Menu = () => {
         <li className="nav-item">
           <Link className="nav-link text-white active bg-gradient-primary " to="/login">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i className="material-icons opacity-10">face</i>
+            </div>
+             
+            <span className="nav-link-text ms-1"> Crear</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white " to="/login">   
+            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i className="material-icons opacity-10">dashboard</i>
             </div>
              
-            <span className="nav-link-text ms-1"> login</span>
+            <span className="nav-link-text ms-1 "> login</span>
           </Link>
         </li>
         <li className="nav-item">
@@ -47,7 +56,7 @@ export const Menu = () => {
     </div>
     <div className="sidenav-footer position-absolute w-100 bottom-0 ">
       <div className="mx-3">         
-        <a className="btn bg-gradient-primary w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
+        <a className=" btn btn-outline-primary mt-4 w-100" href="/" type="button">MI WEB</a>
       </div>
     </div>
   </aside>

@@ -97,16 +97,18 @@
 *::before,
 *::after {
   box-sizing: border-box;
+   
 }
 
 @media (prefers-reduced-motion: no-preference) {
   :root {
     scroll-behavior: smooth;
+    
   }
 }
 
 body {
-  margin: 0;
+  margin: 0;  
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -703,6 +705,7 @@ progress {
   padding-left: calc(var(--bs-gutter-x) * .5);
   margin-right: auto;
   margin-left: auto;
+ 
 }
 
 @media (min-width: 576px) {
@@ -710,6 +713,7 @@ progress {
   .container,
   .container-sm {
     max-width: 540px;
+     
   }
 }
 
@@ -3877,11 +3881,11 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #e91e63;
+  --bs-btn-color:white;
   --bs-btn-border-color: #e91e63;
-  --bs-btn-hover-color: #000;
-  --bs-btn-hover-bg: #e91e63;
-  --bs-btn-hover-border-color: #e91e63;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: white;
+  --bs-btn-hover-border-color: white;
   --bs-btn-focus-shadow-rgb: 233, 30, 99;
   --bs-btn-active-color: #000;
   --bs-btn-active-bg: #e91e63;
@@ -3892,7 +3896,7 @@ fieldset:disabled .btn {
   --bs-btn-disabled-border-color: #e91e63;
   --bs-gradient: none;
 }
-
+ 
 .btn-outline-secondary {
   --bs-btn-color: #7b809a;
   --bs-btn-border-color: #7b809a;
@@ -4780,6 +4784,7 @@ fieldset:disabled .btn {
   flex-wrap: inherit;
   align-items: center;
   justify-content: space-between;
+ 
 }
 
 .navbar-brand {
@@ -21555,6 +21560,7 @@ fieldset:disabled .btn {
 
 .dark-version .main-content {
   background-color: #1a2035 !important;
+  
 }
 
 .dark-version.virtual-reality>div {
@@ -23707,7 +23713,7 @@ hr.horizontal.gray-light {
 
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
   display: block;
-  overflow: auto;
+  overflow: auto ; 
   height: calc(100vh - 200px);
 }
 
@@ -27819,7 +27825,7 @@ pre[class*="language-"] {
  * Container style
  */
 .ps {
-  overflow: hidden !important;
+  /* overflow: hidden !important; */
   overflow-anchor: none;
   -ms-overflow-style: none;
   touch-action: auto;

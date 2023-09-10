@@ -2,21 +2,27 @@ import React, { useState } from "react";
 import Axios from "axios";
 
 export const Login = ()=> {
-    const [user, setUser] = useState(false);
-    const [pass, setPass] = useState(false);
+    const [user, setUser] = useState('');
+    const [pass, setPass] = useState('');
+    const [message, setmessage] = useState('');
+    
 
-    const handleLogin  = (e) => {  
+    const handleLogin  = async(e) => { 
+      var nodeResponse = document.getElementById('message');
       e.preventDefault();     
-      const dataUser ={
-        name:user,
-        password:pass
-      }
-      Axios.get('http://localhost:3000/login', {d:'1'})
-       .then((res)=>{
-          console.log(res.data[0]);
-       })
+      
+      await Axios.post('http://localhost:3000/login',{name:user,password:pass})
+       .then((res)=>{      
+          nodeResponse.classList.remove('invisible');          
+          setmessage(res.data);
+          // TIME OF MESSAGE
+          setTimeout(()=>{
+            nodeResponse.classList.add('invisible');
+          },2000)
+
+       })   
        .catch((err)=>{
-          console.log(err);
+          console.log(err);     
        })
        
     }
@@ -70,7 +76,7 @@ export const Login = ()=> {
                     <button onClick={handleLogin} className="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar sesion</button>
                   </div>
                   <p className="mt-4 text-sm text-center">                    
-                    <a  className="text-primary text-gradient font-weight-bold">No tengo cuenta</a>
+                    <a  id="message" className="  text-primary text-gradient font-weight-bold"> { message } </a>
                   </p>
                 </form>
               </div>
