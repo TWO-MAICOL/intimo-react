@@ -17,39 +17,38 @@ export const Menu = () => {
     <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link text-white active bg-gradient-primary " to="/login">   
+          <Link className="nav-link text-white active bg-gradient-primary " to="/Home">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i className="material-icons opacity-10">face</i>
             </div>
              
-            <span className="nav-link-text ms-1"> Crear</span>
+            <span className="nav-link-text ms-1"> Home</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-white " to="/login">   
+          <Link className="nav-link text-white " to="/Create">   
+            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i className="material-icons opacity-10">dashboard</i>
+            </div>             
+            <span className="nav-link-text ms-1 "> Crear Producto</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link text-white " to="/Ingredient">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i className="material-icons opacity-10">dashboard</i>
             </div>
              
-            <span className="nav-link-text ms-1 "> login</span>
+            <span className="nav-link-text ms-1 ">Ingredientes</span>
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-white " to="/login">   
+          <Link className="nav-link text-white " to="/Category">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i className="material-icons opacity-10">dashboard</i>
             </div>
              
-            <span className="nav-link-text ms-1 "> login</span>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white " to="/login">   
-            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i className="material-icons opacity-10">dashboard</i>
-            </div>
-             
-            <span className="nav-link-text ms-1"> login</span>
+            <span className="nav-link-text ms-1"> Categorias</span>
           </Link>
         </li>
       </ul>

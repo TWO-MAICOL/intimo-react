@@ -9726,6 +9726,10 @@ fieldset:disabled .btn {
 .ms-12 {
   margin-left: 16rem !important;
 }
+.ms-41{
+  margin-left: 41rem !important;
+
+}
 
 .ms-auto {
   margin-left: auto !important;

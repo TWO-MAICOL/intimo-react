@@ -1,9 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
- 
+// ?  MODULOS 
 import { Login } from '../components/Login.jsx'
 import { Home } from '../components/Home.jsx'
 import { Index } from '../components/Index.jsx'
+import {Create} from '../components/Create.jsx'
+import { Category} from '../components/Category.jsx'
+import { Ingredient} from '../components/Ingredients.jsx'
+
 // ROUTES
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 // STYLES 
@@ -23,6 +27,18 @@ const router = createBrowserRouter([
   { 
     path: "/",
     element: <Index/>,
+  },
+  { 
+    path: "/create",
+    element: <Create/>,
+  },
+  { 
+    path: "/ingredient",
+    element: <Ingredient/>,
+  },
+  { 
+    path: "/category",
+    element: <Category/>,
   },
 ]);
 
