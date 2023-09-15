@@ -23,6 +23,8 @@ var con = mysql.createConnection({
 });
 con.connect();
 //? consultas a mi API
+
+// ==================================================================================================================
 app.post('/login', (req, res) => { 
       const name = req.body.name;
       const password = req.body.password;        
@@ -42,6 +44,16 @@ app.post('/login', (req, res) => {
              }
       })
   
+})
+app.get('/getCategories', (req, res) => {
+      con.query('SELECT * FROM caregorias', (err,result)=> {
+         if (result.length > 0) {
+            res.send(result);
+         }else{
+            res.send('No se encontraron categorias');
+         }         
+      }) 
+
 })
 app.get('/getProducts', (req, res) => {
       res.send('buscando product');

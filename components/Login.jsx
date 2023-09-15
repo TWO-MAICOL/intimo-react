@@ -21,9 +21,7 @@ export const Login = ()=> {
           },2000)
 
        })   
-       .catch((err)=>{
-          console.log(err);     
-       })
+       .catch((err)=>{console.log(err)})
        
     }
     return (

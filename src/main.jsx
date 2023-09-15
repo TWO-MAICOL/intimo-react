@@ -15,6 +15,10 @@ import '../assets/css/nucleo-icons.css'
 import '../assets/css/nucleo-svg.css'  
 import '../assets/css/material-dashboard.css' 
 
+// PRIMERA REACT - MODULES
+import "primereact/resources/themes/lara-light-indigo/theme.css";          
+import "primereact/resources/primereact.min.css";  
+
 const router = createBrowserRouter([
   { 
     path: "/login",
