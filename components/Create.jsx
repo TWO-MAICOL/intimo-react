@@ -1,55 +1,99 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef  } from 'react';
 import {Navbar} from './Navbar.jsx'
 import {Menu} from './Menu.jsx'
 import {Footer} from './Footer.jsx'
-// import select con react 
-import { MultiSelect } from "react-multi-select-component"; 
+// import select con npm react 
+import { MultiSelect } from "react-multi-select-component";
 // import upload con react
 import { FileUpload } from 'primereact/fileupload';
 // import textarea con react
 import { InputTextarea } from 'primereact/inputtextarea';
 // import axios para las consultas al server
 import Axios from "axios";
+// import input con reac 
+import { InputText } from 'primereact/inputtext';
+// import Toast message ASND button
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 
 export const Create = () => {
 
-   const categories = [
-    {label: 'categories', value: 'miguel'},
-    {label: 'categories', value: 'miguel'},
-    
-   ];
-    // consulta server all the categories
-    Axios.get('http://localhost:3000/getCategories' )
-    .then((res)=>{      
-       
-      console.log(res);          
+   const categories = [];   
+   const [category, setcategory] = useState([]); 
+   const [selected, setSelected] = useState([]); 
 
-    })   
-    .catch((err)=>{console.log(err)})
-        
-   
-    
-    const [selected, setSelected] = useState([]); 
+   useEffect(() => {
+    Axios.get('http://localhost:3000/getCategories')
+       .then((res)=>{
+        setcategory(res.data)         
+       })    
+       .catch((err)=>{console.log(err)}) 
+  }, []);
+    // mapeo para meter data en multiSelect
+  category.map(e => {categories.push({label: e.nombre,value:e.nombre})})
+  // -------------------------SAVE IMG AND DATA--------------------------------------------------------------------------
+  const [file,setFile] = useState([]);
+  const [name, setName] = useState(); 
+  const [price, serPrice] = useState(); 
+  const [descrip,setDescrip] = useState(); 
+
+  const handleSave = (e) => {
+    setFile(e.files[0]);
+
+
+    const data = new FormData();
+    data.append('file',file);     
+
+    Axios.post('http://localhost:3000/upload', data)
+      .then(response =>{
+
+          if (response.data !==' ') {   
+
+            toast.current.show({ 
+              severity: 'success', 
+              summary: ' Imgaen', 
+              detail: 'Message Content' ,
+              life: 2000
+            });
+            // window.location.reload(false);
+           
+          } else {
+            console.log('IMAGEN NO SUBIDA');
+            
+          }
+    });
+  }
+  const handleData = (e) => {
+    e.preventDefault();
+    console.log(name,price,descrip,selected);
+  }
+
+  // -----MESAAGE-----------------------------------------------------------------------------------
+  const toast = useRef(null);
  
   return (
     <>
-      <title> Home</title> 
+    {/* PARA CARGAR LAS NOTIFICACIONES */}
+      <Toast ref={toast} />
+      <title>Productos</title> 
 
-      <Menu/>
-      
+      <Menu/>        
       <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ps--active-y "> 
         <Navbar/>
-        <div className="container-fluid py-4 mt-4 ">
+        <div className="container-fluid py-4 mt-4">
           <div className='row'>   
-            <div className="col-md-4 me-3">
-                <FileUpload 
+            <div className="col-md-4 me-3">            
+                <FileUpload  
+                customUpload    
+                uploadHandler={handleSave}      
                 className="card"
-                name="demo[]" 
-                url={'/api/upload'} 
+                name="file"                 
                 multiple accept="image/*" 
-                maxFileSize={1000000} 
+                maxFileSize={2000000} 
                 emptyTemplate={<h6 className="m-0">Selecciona la imagen de el producto</h6>} 
                 />
+             <div>                 
+        </div>
             </div>         
             <div className="card col-md-7   " >              
                 <div className="card-header font-weight-bolder bg-gradient-dark text-white">
@@ -60,35 +104,52 @@ export const Create = () => {
                     <div className='row'>
                         <div className='form-group col-md-6'>
                           <label className="form-label">Nombre</label> 
-                            <div className="input-group input-group-outline my-3  ">
-                              <input type="text" className="form-control"placeholder="Usuario"/>
+                            <div className="input-group input-group-outline my-3  ">                              
+                              <InputText  
+                              onChange={(e) => setName(e.target.value)}
+                              className="form-control" 
+                              placeholder="Usuario"
+                              name="bbb" 
+                              />                              
                             </div>
                         </div>
                         <div className='form-group col-md-6'>
                           <label className="form-label">Precio</label> 
                             <div className="input-group input-group-outline my-3  ">
-                              <input type="text" className="form-control" placeholder="$"/>
+                              <InputText  
+                                onChange={(e) => serPrice(e.target.value)}
+                                className="form-control" 
+                                placeholder="$"
+                                />
                             </div>
                         </div>
                     </div>                                    
                      <label className="form-label">Seleciona la categoria del producto</label>                     
-                         
+                          {/* <div> { JSON.stringify(file )} </div> */}
                       <MultiSelect
                       // opcion es un array 
                         options={categories}                                                
-                        value={selected}
+                        value={selected}  
                         onChange={setSelected}
                         labelledBy={ 'selected' }
                         isCreatable={true}  
-                                               
-                      />
-                          
+                        className="col-md-12" 
+                        name="aa"                       
+                      />                   
+                       
                       <InputTextarea  
                       className="col-12 mt-3 " 
                       placeholder=" Escribe la descripcion del producto"
-                      onChange={(e) => setValue(e.target.value)} 
+                      onChange={(e) => setDescrip(e.target.value)} 
                       rows={5}   
                       />
+                      <div className='ard flex justify-content-center'>
+                        <Button 
+                        className="p-button-primary  col-md-7" 
+                        onClick={handleData} 
+                        label="Guardar" 
+                        />
+                      </div>
                   </form>                 
               </div>
               <hr className="dark horizontal my-0"/>
@@ -96,7 +157,7 @@ export const Create = () => {
                  
             </div>
             </div>
-          
+         
         </div>
        </div>          
       

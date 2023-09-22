@@ -6,18 +6,15 @@ import { Home } from '../components/Home.jsx'
 import { Index } from '../components/Index.jsx'
 import {Create} from '../components/Create.jsx'
 import { Category} from '../components/Category.jsx'
-import { Ingredient} from '../components/Ingredients.jsx'
-
 // ROUTES
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-// STYLES 
-import '../assets/css/nucleo-icons.css'
-import '../assets/css/nucleo-svg.css'  
-import '../assets/css/material-dashboard.css' 
-
 // PRIMERA REACT - MODULES
 import "primereact/resources/themes/lara-light-indigo/theme.css";          
 import "primereact/resources/primereact.min.css";  
+// template styels
+import '../assets/css/material-dashboard.css'   
+//  stylos importantes PrimeraReact
+import  'primeflex/primeflex.css'
 
 const router = createBrowserRouter([
   { 
@@ -35,10 +32,6 @@ const router = createBrowserRouter([
   { 
     path: "/create",
     element: <Create/>,
-  },
-  { 
-    path: "/ingredient",
-    element: <Ingredient/>,
   },
   { 
     path: "/category",

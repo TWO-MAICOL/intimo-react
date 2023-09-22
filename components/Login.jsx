@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Axios from "axios";
-
+// import input con reac 
+import { InputText } from 'primereact/inputtext';
+ 
 export const Login = ()=> {
     const [user, setUser] = useState('');
     const [pass, setPass] = useState('');
@@ -32,7 +34,7 @@ export const Login = ()=> {
       <span className="mask bg-gradient-dark opacity-6"></span>
       <div className="container my-auto">
         <div className="row">
-          <div className="col-lg-4 col-md-8 col-12 mx-auto mt-4">
+          <div className="col-lg-4 col-md-8  mx-auto mt-4">
             <div className="card z-index-0 fadeIn3 fadeInBottom">
               <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div className="bg-gradient-secondary shadow-primary border-radius-lg py-3 pe-1">
@@ -57,19 +59,25 @@ export const Login = ()=> {
                 </div>
               </div>
               <div className="card-body">
-                <form role="form" className="text-start">
-                    <label className="form-label">Usuario</label> 
-                  <div className="input-group input-group-outline my-3">
-                    <input type="text" className="form-control" onChange={(e)=>{setUser(e.target.value)}} placeholder="Usuario"/>
-                  </div>
-                    <label className="form-label">Contraseña</label>
-                  <div className="input-group input-group-outline mb-3">
-                    <input type="password" className="form-control" onChange={(e)=>{setPass(e.target.value)}} placeholder="Contraseña"/>
-                  </div>
-                  <div className="form-check form-switch d-flex align-items-center mb-3">
-                    <input className="form-check-input" type="checkbox" id="rememberMe"  />
-                    <label className="form-check-label mb-0 ms-3" >Ver contraseña</label>
-                  </div>
+                <form className="text-start">
+                    <label className="form-label">Usuario</label>                    
+                    <InputText  
+                      onChange={(e) => setUser(e.target.value)}
+                      className="form-control " 
+                      placeholder="Usuario"
+                       
+                     />                     
+                   
+                    <label className="form-label">Contraseña</label>                 
+                     
+                      <InputText  
+                        onChange={(e) => setPass(e.target.value)}
+                        className="form-control" 
+                        placeholder="Contraseña"
+                        type="password"
+                         
+                      />                                           
+                     
                   <div className="text-center">
                     <button onClick={handleLogin} className="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar sesion</button>
                   </div>

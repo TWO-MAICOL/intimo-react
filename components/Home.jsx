@@ -1,9 +1,71 @@
 import {Navbar} from './Navbar.jsx'
 import {Menu} from './Menu.jsx'
 import {Footer} from './Footer.jsx'
- 
+//  view of data primeraReact 
+import React, { useState, useEffect } from "react";
+import { ProductService } from "./ProductService.jsx";
+import { Button } from "primereact/button";
+import { DataView } from "primereact/dataview";
+import { Rating } from "primereact/rating";
+import { Tag } from "primereact/tag" 
+
+
 export const Home = ()=> {
-  
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    ProductService.getProducts().then((data) => setProducts(data));
+  }, []);
+
+  const getSeverity = (product) => {
+    switch (product.inventoryStatus) {
+      case 'Disponible':
+        return 'success';
+      case 'Agotado':
+          return 'warning';      
+      default:
+        return null;
+    }
+  };
+  const itemTemplate = (product) => {
+    return (
+       
+      <div className="col-12">
+        <div className="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4  ">
+          <img
+            className="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
+            src={`https://primefaces.org/cdn/primereact/images/product/${product.image}`}
+            alt={product.name}
+          />
+          <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4 border-round">
+            <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+              <div className="text-2xl font-bold text-900">{product.name}</div>
+              <Rating value={product.rating} readOnly cancel={false}></Rating>
+              <div className="flex align-items-center gap-3">
+                <span className="flex align-items-center gap-2">
+                  <i className="pi pi-tag"></i>
+                  <span className="font-semibold">{product.category}</span>
+                </span>
+                <Tag
+                  value={product.inventoryStatus}
+                  severity={getSeverity(product)}
+                ></Tag>
+              </div>
+            </div>
+            <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+              <span className="text-2xl font-semibold">${product.price}</span>
+              <Button
+                icon="pi pi-shopping-cart"
+                className="p-button-rounded"
+                disabled={product.inventoryStatus === "OUTOFSTOCK"}
+              ></Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
     return (
     <>    
      <title> Home </title> 
@@ -11,42 +73,20 @@ export const Home = ()=> {
       <Menu/>
        
       <main className="main-content position-relative max-height-vh-100 h-100 border-radius-lg ps ps--active-y "> 
-        <Navbar/>
-       {/* <div className="container-fluid py-4 mt-4">
-        <div className='row'>  
-          <div className="card col-md-4" data-animation="true">
-              <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                <a className="d-block blur-shadow-image">
-                  <img src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/img/products/product-1-min.jpg" alt="img-blur-shadow" className="img-fluid shadow border-radius-lg"/>
-                </a>
-                <div className="colored-shadow" style= {{backgroundImage:"URL(https://demos.creative-tim.com/test/material-dashboard-pro/assets/img/products/product-1-min.jpg)"}}></div>
-              </div>
-              <div className="card-body text-center">
-                <div className="d-flex mt-n6 mx-auto">
-                  <a className="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Refresh">
-                    <i className="material-icons text-lg">refresh</i>
-                  </a>
-                  <button className="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit">
-                    <i className="material-icons text-lg">edit</i>
-                  </button>
-                </div>
-                <h5 className="font-weight-normal mt-3">
-                  <a  >Cozy 5 Stars Apartment</a>
-                </h5>
-                <p className="mb-0">
-                  The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.
-                </p>
-              </div>
-              <hr className="dark horizontal my-0"/>
-              <div className="card-footer d-flex">
-                <p className="font-weight-normal my-auto">$899/night</p>
-                <i className="material-icons position-relative ms-auto text-lg me-1 my-auto">place</i>
-                <p className="text-sm my-auto"> Barcelona, Spain</p>
-              </div>
+        <Navbar/>        
+         <div className="container-fluid py-4 mt-2">
+
+          <div className='card '>
+
+           <DataView
+              value={products}
+              itemTemplate={itemTemplate}
+              paginator              
+              rows={5}
+            />
           </div>
-          
-        </div>
-       </div>     */}
+           
+         </div>
        
         <Footer/>
       </main>

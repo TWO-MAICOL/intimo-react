@@ -16,7 +16,7 @@ export const Navbar = () => {
           <div className="ms-md-auto pe-md-3 d-flex align-items-center">
             <div className="d-flex px-2 py-1">
                 <div>
-                  <img src="../assets/img/team-2.jpg" className="avatar avatar-sm me-3 border-radius-lg" alt="user1"/>
+                  <img src=" " className="avatar avatar-sm me-3 border-radius-lg" alt="user1"/>
                 </div>
                 <div className="d-flex flex-column justify-content-center">
                   <h6 className="mb-0 text-sm">Jeisson</h6>

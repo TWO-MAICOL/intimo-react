@@ -9,7 +9,9 @@ const port = 3000
 //? uso cors
 const cors = require('cors')
 app.use(cors())
-//? where is runing my server
+//? where is runing my server IN PORT 3000
+const fileUpload = require('express-fileupload')
+app.use(fileUpload());
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
@@ -55,12 +57,19 @@ app.get('/getCategories', (req, res) => {
       }) 
 
 })
-app.get('/getProducts', (req, res) => {
-      res.send('buscando product');
-
+app.post('/upload',(req,res) => {     
+       
+      var EDFile = req.files.file ;
+      EDFile.mv(`../assets/img/products/${EDFile.name}`,err => {
+          if(err) return res.send({ message : err })  
+          return res.send('File upload')
+      })
+       
+  
 })
 app.post('/createProduct', (req, res) => {
-      res.send('creando product');
+      res.send(req);
+      console.log(req);
 
 })
 app.get('/editProduct', (req, res) => {

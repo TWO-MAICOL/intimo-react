@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
- 
+import React, { useState } from "react"; 
+import { NavLink } from 'react-router-dom';
+// ICON 
+import {  ImHome,ImStackoverflow,ImPencil2 } from "react-icons/im";
+
 export const Menu = () => {
   // const [showMenu, setShowMenu] = useState(false);
   return (
@@ -8,7 +10,7 @@ export const Menu = () => {
    <aside className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div className="sidenav-header">
       <i className="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a className="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
+      <a className="navbar-brand m-0" href="/">
         <img src="./favicon.ico" className="navbar-brand-img h-100 mr-2" alt="main_logo"/>
         <span className="ms-1 font-weight-bold text-white p-4">I  N  T  I / H O M E</span>
       </a>
@@ -17,41 +19,33 @@ export const Menu = () => {
     <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <Link className="nav-link text-white active bg-gradient-primary " to="/Home">   
-            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i className="material-icons opacity-10">face</i>
-            </div>
-             
-            <span className="nav-link-text ms-1"> Home</span>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link text-white " to="/Create">   
-            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i className="material-icons opacity-10">dashboard</i>
+          <NavLink className=" nav-link text-white" to="/Home">   
+            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">       
+             <ImHome />   
             </div>             
-            <span className="nav-link-text ms-1 "> Crear Producto</span>
-          </Link>
+            <span className="nav-link-text ms-1"> Home</span>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-white " to="/Ingredient">   
+          <NavLink  className="  nav-link text-white" to="/create">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i className="material-icons opacity-10">dashboard</i>
-            </div>
-             
-            <span className="nav-link-text ms-1 ">Ingredientes</span>
-          </Link>
+              <ImPencil2 />           
+            </div>             
+            <span className="nav-link-text ms-1">Crear Producto</span>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link text-white " to="/Category">   
+          <NavLink className="  nav-link text-white" to="/category">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i className="material-icons opacity-10">dashboard</i>
-            </div>
-             
-            <span className="nav-link-text ms-1"> Categorias</span>
-          </Link>
+              <ImStackoverflow />   
+            </div>             
+            <span className="nav-link-text ms-1">Categorias</span>
+          </NavLink>
         </li>
+            
+  
       </ul>
+    
     </div>
     <div className="sidenav-footer position-absolute w-100 bottom-0 ">
       <div className="mx-3">         
