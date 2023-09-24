@@ -38,7 +38,7 @@ export const Login = ()=> {
             <div className="card z-index-0 fadeIn3 fadeInBottom">
               <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div className="bg-gradient-secondary shadow-primary border-radius-lg py-3 pe-1">
-                  <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">Inicia Sesion</h4>
+                  <h4 className="text-white font-weight-bolder text-center mt-2 mb-0">Welcome</h4>
                   <div className="row mt-3">
                     <div className="col-2 text-center ms-auto">
                       <a className="btn btn-link px-3"  >
@@ -60,23 +60,25 @@ export const Login = ()=> {
               </div>
               <div className="card-body">
                 <form className="text-start">
-                    <label className="form-label">Usuario</label>                    
-                    <InputText  
-                      onChange={(e) => setUser(e.target.value)}
-                      className="form-control " 
-                      placeholder="Usuario"
-                       
-                     />                     
-                   
-                    <label className="form-label">Contraseña</label>                 
-                     
-                      <InputText  
-                        onChange={(e) => setPass(e.target.value)}
-                        className="form-control" 
-                        placeholder="Contraseña"
-                        type="password"
-                         
-                      />                                           
+                        <label className="form-label">Usuario</label>                    
+                      <div className="input-group input-group-outline my-3  ">
+                        <InputText  
+                          onChange={(e) => setUser(e.target.value)}
+                          className="form-control " 
+                          placeholder="Usuario"
+                          
+                        />                                
+                      </div>                  
+                      <label className="form-label">Contraseña</label>
+                      <div className="input-group input-group-outline my-3  ">
+                        <InputText  
+                          onChange={(e) => setPass(e.target.value)}
+                          className="form-control" 
+                          placeholder="Contraseña"
+                          type="password"
+                          
+                        />                                                                    
+                      </div>               
                      
                   <div className="text-center">
                     <button onClick={handleLogin} className="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar sesion</button>
