@@ -18,6 +18,7 @@ import { Toast } from 'primereact/toast';
 
 export const Create = () => {
 
+  // get all categories
    const categories = [];   
    const [category, setcategory] = useState([]); 
    const [selected, setSelected] = useState([]); 
@@ -32,27 +33,28 @@ export const Create = () => {
     // mapeo para meter data en multiSelect
   category.map(e => {categories.push({label: e.nombre,value:e.nombre})})
   // -------------------------SAVE IMG AND DATA--------------------------------------------------------------------------
-  const [file,setFile] = useState([]);
-  const [name, setName] = useState(); 
-  const [price, serPrice] = useState(); 
+  const [file,setFile]       = useState([]);
+  const [name, setName]      = useState(); 
+  const [price, serPrice]    = useState(); 
   const [descrip,setDescrip] = useState(); 
+  const [status, setStatus]  = useState();
+  const [star,setStar]       = useState();
 
   const handleSave = (e) => {
     setFile(e.files[0]);
-
 
     const data = new FormData();
     data.append('file',file);     
 
     Axios.post('http://localhost:3000/upload', data)
-      .then(response =>{
+      .then(res =>{
 
-          if (response.data !==' ') {   
+          if (res.data !==' ') {   
 
             toast.current.show({ 
               severity: 'success', 
-              summary: ' Imgaen', 
-              detail: 'Message Content' ,
+              summary: ' CARGANDO IMAGEN', 
+              detail: res.data ,
               life: 2000
             });
             // window.location.reload(false);
@@ -63,9 +65,29 @@ export const Create = () => {
           }
     });
   }
-  const handleData = (e) => {
+  const handleSendData = async(e) => {
     e.preventDefault();
-    console.log(name,price,descrip,selected);
+
+    var infoProduct = {
+      name:name, 
+      price:price,
+      description:descrip,
+      category:selected[0].label,
+      status: status,
+      nameImg:file.name,
+      star:star
+    };
+
+    await Axios.post('http://localhost:3000/insertProduct ', infoProduct)
+      .then(res =>{        
+          toast.current.show({ 
+            severity: 'success', 
+            summary: ' DATOS CARGADOS', 
+            detail: res.data ,
+            life: 2000
+          });
+      })
+      
   }
 
   // -----MESAAGE-----------------------------------------------------------------------------------
@@ -108,7 +130,7 @@ export const Create = () => {
                               <InputText  
                               onChange={(e) => setName(e.target.value)}
                               className="form-control" 
-                              placeholder="Usuario"
+                              placeholder="Nombre"
                               name="bbb" 
                               />                              
                             </div>
@@ -120,6 +142,7 @@ export const Create = () => {
                                 onChange={(e) => serPrice(e.target.value)}
                                 className="form-control" 
                                 placeholder="$"
+                                type='number'
                                 />
                             </div>
                         </div>
@@ -142,11 +165,34 @@ export const Create = () => {
                       placeholder=" Escribe la descripcion del producto"
                       onChange={(e) => setDescrip(e.target.value)} 
                       rows={5}   
-                      />
+                      />                    
+                      <div className='row'>
+                        <div className='form-group col-md-6'>
+                            <label className="form-label">Estado</label> 
+                              <div className="input-group input-group-outline my-3  ">
+                                <InputText  
+                                  onChange={(e) => setStatus(e.target.value)}
+                                  className="form-control" 
+                                  placeholder="Estado del activo disponible agotado"
+                                  />
+                              </div>
+                          </div>
+                          <div className='form-group col-md-6'>
+                           <label className="form-label">Estrellas</label> 
+                              <div className="input-group input-group-outline my-3  ">
+                                <InputText  
+                                  onChange={(e) => setStar(e.target.value)}
+                                  className="form-control" 
+                                  placeholder="Estrellas del  del 1 al 5"
+                                  type='number'
+                                  />
+                              </div>
+                          </div>
+                      </div>
                       <div className='ard flex justify-content-center'>
                         <Button 
                         className="p-button-primary  col-md-7" 
-                        onClick={handleData} 
+                        onClick={handleSendData} 
                         label="Guardar" 
                         />
                       </div>

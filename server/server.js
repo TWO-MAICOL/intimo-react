@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const express = require('express')
 const app = express()
 app.use(express.json())
-// ?port if the conexion 
+//? port if the conexion 
 const port = 3000
 //? uso cors
 const cors = require('cors')
@@ -12,10 +12,10 @@ app.use(cors())
 //? where is runing my server IN PORT 3000
 const fileUpload = require('express-fileupload')
 app.use(fileUpload());
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
 //? credentials y conexion a BD 
 var con = mysql.createConnection({
   host : 'localhost',
@@ -67,11 +67,39 @@ app.post('/upload',(req,res) => {
        
   
 })
-app.post('/createProduct', (req, res) => {
-      res.send(req);
-      console.log(req);
+app.get('/getProducts', (req, res) => {
+       
+      con.query('SELECT * FROM  productos', (err,result)=> {
+         if (result.length > 0) {
+            res.send(result);
+         }else{
+            res.send('No se encontraron productos');
+         }         
+      }) 
 
 })
+app.post('/insertProduct', (req, res) => {
+       
+      var values = [
+            req.body.name,
+            req.body.description,
+            req.body.nameImg,
+            req.body.price,
+            req.body.category,
+            req.body.status,
+            req.body.star
+      ]
+      con.query('INSERT INTO productos (nombre,descripcion,routeImg,precio,categoria,estado,estrellas) VALUES(?)',[values], (err,result)=> {
+         if (err) {
+               res.send('No se insertaron los productos');
+           }else{
+               res.send('Producto insertado con exito');
+         }              
+      })
+})
+
+
+
 app.get('/editProduct', (req, res) => {
       res.send('editando product');
 
