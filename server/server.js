@@ -33,9 +33,8 @@ app.post('/login', (req, res) => {
 
       con.query("SELECT * FROM login WHERE usuario =  ? AND contrasena = ? ", [name,password],  (err,result) => {
              if (result.length > 0 ) { 
+                   //?inicia sesion              
                   res.send(result);
-              //?inicia sesion
-              res.redirect('  ');
                 
             }else if(name == '' && password == ''){
                   res.send('CAMPOS VACIOS');

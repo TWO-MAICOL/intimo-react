@@ -10,15 +10,17 @@ import { Tag } from "primereact/tag"
 // import axios para las consultas al server
 import Axios from "axios";
 import { BsCart4 } from "react-icons/bs";
+//  inicio of session
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 export const Home = ()=> {
   const [products, setProducts] = useState([]);
-
+ console.log(cookies.get('user'));
   useEffect(() => { 
     Axios.get('http://localhost:3000/getProducts')
     .then((res) => {
-      setProducts(res.data);
-      console.log(products);
+      setProducts(res.data);      
     })    
     .catch((err)=>{console.log(err)}) 
 
@@ -74,7 +76,8 @@ export const Home = ()=> {
       </div>
     );
   };
-
+ 
+ 
     return (
     <>    
      <title> Home </title> 

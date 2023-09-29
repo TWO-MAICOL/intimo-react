@@ -2,29 +2,43 @@ import React, { useState } from "react";
 import Axios from "axios";
 // import input con reac 
 import { InputText } from 'primereact/inputtext';
- 
+//  inicio of session
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
+
 export const Login = ()=> {
     const [user, setUser] = useState('');
     const [pass, setPass] = useState('');
     const [message, setmessage] = useState('');
-    
 
     const handleLogin  = async(e) => { 
       var nodeResponse = document.getElementById('message');
       e.preventDefault();     
       
       await Axios.post('http://localhost:3000/login',{name:user,password:pass})
-       .then((res)=>{      
-          nodeResponse.classList.remove('invisible');          
-          setmessage(res.data);
-          // TIME OF MESSAGE
-          setTimeout(()=>{
-            nodeResponse.classList.add('invisible');
-          },2000)
+       .then((res)=>{             
+
+        if (res.data[0].usuario ) {         
+          // variabels of session
+          var json = res.data[0];
+          cookies.set("id",json.id );
+          cookies.set("user",json.usuario);
+          cookies.set("pass", json.contrasena);     
+          window.location.href = "/home";
+
+        }else{          
+           nodeResponse.classList.remove('invisible');          
+           setmessage(res.data);
+           // TIME OF MESSAGE
+           setTimeout(()=>{
+             nodeResponse.classList.add('invisible');
+           },2000)
+
+        }
 
        })   
        .catch((err)=>{console.log(err)})
-       
+                
     }
     return (
     <>  
@@ -60,23 +74,26 @@ export const Login = ()=> {
               </div>
               <div className="card-body">
                 <form className="text-start">
-                    <label className="form-label">Usuario</label>                    
-                    <InputText  
-                      onChange={(e) => setUser(e.target.value)}
-                      className="form-control " 
-                      placeholder="Usuario"
-                       
-                     />                     
-                   
-                    <label className="form-label">Contraseña</label>                 
-                     
+                    <label className="form-label">Usuario</label>                                                     
+                    <div className="input-group input-group-outline my-3  ">
                       <InputText  
-                        onChange={(e) => setPass(e.target.value)}
-                        className="form-control" 
-                        placeholder="Contraseña"
-                        type="password"
-                         
-                      />                                           
+                        onChange={(e) => setUser(e.target.value)}
+                        className="form-control " 
+                        placeholder="Usuario"
+                        
+                      />      
+                     </div>                     
+                      
+                    <label className="form-label">Contraseña</label>                 
+                    <div className="input-group input-group-outline my-3  ">
+                        <InputText  
+                          onChange={(e) => setPass(e.target.value)}
+                          className="form-control" 
+                          placeholder="Contraseña"
+                          type="password"
+                          
+                        />     
+                     </div>                                         
                      
                   <div className="text-center">
                     <button onClick={handleLogin} className="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar sesion</button>
