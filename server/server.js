@@ -35,7 +35,7 @@ app.post('/login', (req, res) => {
              if (result.length > 0 ) { 
                    //?inicia sesion              
                   res.send(result);
-                
+                  
             }else if(name == '' && password == ''){
                   res.send('CAMPOS VACIOS');
                    
