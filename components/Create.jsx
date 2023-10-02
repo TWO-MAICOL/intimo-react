@@ -15,9 +15,15 @@ import { InputText } from 'primereact/inputtext';
 // import Toast message ASND button
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
+//  inicio of session
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
-export const Create = () => {
-
+export const Create = () => {   
+// valid usuer for que pueda acceder
+  if(!cookies.get('user')){
+    window.location.href="./login";
+  }
   // get all categories
    const categories = [];   
    const [category, setcategory] = useState([]); 
@@ -88,7 +94,7 @@ export const Create = () => {
           });
       })
       
-  }
+  }    
 
   // -----MESAAGE-----------------------------------------------------------------------------------
   const toast = useRef(null);

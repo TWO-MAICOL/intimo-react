@@ -15,8 +15,12 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
 export const Home = ()=> {
-  const [products, setProducts] = useState([]);
- console.log(cookies.get('user'));
+// valid usuer for que pueda acceder
+  if(!cookies.get('user')){
+    window.location.href="./login";
+  }
+  const [products, setProducts] = useState([]); 
+
   useEffect(() => { 
     Axios.get('http://localhost:3000/getProducts')
     .then((res) => {
@@ -53,7 +57,7 @@ export const Home = ()=> {
               <div className="flex align-items-center gap-3">
                 <span className="flex align-items-center gap-2">
                   <i className="pi pi-tag"> </i>
-                  {/* <span className="font-semibold">{product.categoria}</span> */}
+                  <span className="font-semibold">{product.categoria}</span>
                 </span>
                 <Tag 
                   value={product.estado}
@@ -77,7 +81,7 @@ export const Home = ()=> {
     );
   };
  
- 
+    
     return (
     <>    
      <title> Home </title> 
