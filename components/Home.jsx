@@ -12,7 +12,7 @@ import Axios from "axios";
 import { BsCart4 } from "react-icons/bs";
 //  inicio of session
 import Cookies from "universal-cookie";
-const cookies = new Cookies();
+const cookies = new Cookies(); 
 
 export const Home = ()=> {
 // valid usuer for que pueda acceder
@@ -71,7 +71,7 @@ export const Home = ()=> {
               <Button              
                 icon={  <BsCart4/>}
                 className="p-button-rounded"
-                disabled={product.estado === "Agotado"}
+                disabled={product.estado === "agotado"}
               ></Button>
               
             </div>

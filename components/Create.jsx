@@ -18,6 +18,13 @@ import { Toast } from 'primereact/toast';
 //  inicio of session
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
+// PRIMERA REACT - MODULES
+import "primereact/resources/themes/lara-light-indigo/theme.css";          
+import "primereact/resources/primereact.min.css";  
+// template styels
+import '../assets/css/material-dashboard.css'
+//  stylos importantes PrimeraReact
+import  'primeflex/primeflex.css'
 
 export const Create = () => {   
 // valid usuer for que pueda acceder
@@ -101,6 +108,9 @@ export const Create = () => {
  
   return (
     <>
+
+
+    
     {/* PARA CARGAR LAS NOTIFICACIONES */}
       <Toast ref={toast} />
       <title>Productos</title> 

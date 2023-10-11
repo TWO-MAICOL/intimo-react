@@ -32,7 +32,7 @@ export const Menu = () => {
               <ImPencil2 />           
             </div>             
             <span className="nav-link-text ms-1">Crear Producto</span>
-          </NavLink>
+          </NavLink>  
         </li>
         <li className="nav-item">
           <NavLink className="  nav-link text-white" to="/category">   

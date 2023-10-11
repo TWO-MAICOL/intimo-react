@@ -8,14 +8,7 @@ import {Create} from '../components/Create.jsx'
 import { Category} from '../components/Category.jsx'
 // ROUTES
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-// PRIMERA REACT - MODULES
-import "primereact/resources/themes/lara-light-indigo/theme.css";          
-import "primereact/resources/primereact.min.css";  
-// template styels
-import '../assets/css/material-dashboard.css'   
-//  stylos importantes PrimeraReact
-import  'primeflex/primeflex.css'
-
+ 
 const router = createBrowserRouter([
   { 
     path: "/login",

@@ -23467,9 +23467,9 @@ hr.horizontal.gray-light {
   object-fit: cover;
 }
 
-.navbar {
+/* .navbar {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.16);
-}
+} */
 
 .navbar .navbar-brand {
   color: #344767;
@@ -23477,7 +23477,7 @@ hr.horizontal.gray-light {
 }
 
 .navbar .nav-link {
-  color: #344767;
+  /* color: #344767; */
   padding: 0.5rem 1rem;
   font-weight: 400;
   font-size: 0.875rem;
