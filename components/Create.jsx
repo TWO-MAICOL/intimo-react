@@ -108,8 +108,6 @@ export const Create = () => {
  
   return (
     <>
-
-
     
     {/* PARA CARGAR LAS NOTIFICACIONES */}
       <Toast ref={toast} />
@@ -133,7 +131,7 @@ export const Create = () => {
              <div>                 
         </div>
             </div>         
-            <div className="card col-md-7   " >              
+            <div className="card col-md-7 " >              
                 <div className="card-header font-weight-bolder bg-gradient-dark text-white">
                     INGRESAR  ||  PRODUCTOS                   
                 </div>

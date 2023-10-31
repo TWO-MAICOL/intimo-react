@@ -89,11 +89,11 @@ app.post('/insertProduct', (req, res) => {
             req.body.star
       ]
       con.query('INSERT INTO productos (nombre,descripcion,routeImg,precio,categoria,estado,estrellas) VALUES(?)',[values], (err,result)=> {
-         if (err) {
+            if (err) {
                res.send('No se insertaron los productos');
-           }else{
+             }else{
                res.send('Producto insertado con exito');
-         }              
+            }              
       })
 })
 
@@ -107,3 +107,18 @@ app.get('/deleteProduct', (req, res) => {
       res.send('borarando product');
 
 })
+
+app.post('/addCategory', (req, res) => {
+       
+      var values = [
+         req.body.category           
+      ]
+      con.query('INSERT INTO caregorias (nombre) VALUES(?)',[values], (err,result)=> {
+            if(err){
+                 res.send("No se cargo la categoria");       
+            }else{
+                  res.send("Categoria guardada correctamente");
+            }                 
+      })
+        
+} )
