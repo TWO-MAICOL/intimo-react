@@ -38,6 +38,8 @@ export const Home = ()=> {
           return 'warning';      
       default:
         return null;
+
+        
     }
   };
   const itemTemplate = (product) => {

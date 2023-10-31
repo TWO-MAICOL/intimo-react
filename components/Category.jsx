@@ -33,7 +33,6 @@ export const Category = () => {
        })    
        .catch((err)=>{console.log(err)}) 
   }, []);  
-    
 
   const addCategory = async (e) => {   
     e.preventDefault();
