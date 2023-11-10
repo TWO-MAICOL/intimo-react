@@ -9,6 +9,7 @@ import { Rating } from "primereact/rating";
 import { Tag } from "primereact/tag" 
 // import axios para las consultas al server
 import Axios from "axios";
+// icons
 import { BsCart4 } from "react-icons/bs";
 //  inicio of session
 import Cookies from "universal-cookie";
@@ -37,11 +38,10 @@ export const Home = ()=> {
       case 'agotado':
           return 'warning';      
       default:
-        return null;
-
-        
+        return null;        
     }
   };
+
   const itemTemplate = (product) => {
     return (
        

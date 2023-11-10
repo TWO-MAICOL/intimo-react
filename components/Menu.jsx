@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 import { NavLink } from 'react-router-dom';
 // ICON 
-import {  ImHome,ImStackoverflow,ImPencil2 } from "react-icons/im";
+import {  ImHome,ImPencil2,ImUsers,ImStopwatch,ImDice} from "react-icons/im";
 
 export const Menu = () => {
   // const [showMenu, setShowMenu] = useState(false);
@@ -37,13 +37,27 @@ export const Menu = () => {
         <li className="nav-item">
           <NavLink className="  nav-link text-white" to="/category">   
             <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <ImStackoverflow />   
+              <ImDice />   
             </div>             
             <span className="nav-link-text ms-1">Categorias</span>
           </NavLink>
         </li>
-            
-  
+        <li className="nav-item">
+          <NavLink className="  nav-link text-white" to="/User">   
+            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <ImUsers />   
+            </div>             
+            <span className="nav-link-text ms-1">Usuarios</span>
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="  nav-link text-white" to="/ ">   
+            <div className="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <ImStopwatch />   
+            </div>             
+            <span className="nav-link-text ms-1">Mas populares</span>
+          </NavLink>
+        </li>          
       </ul>
     
     </div>

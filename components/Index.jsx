@@ -1,19 +1,88 @@
 import React, { useState, useEffect,useRef  } from 'react';
- // importing aos
+ // importing aos and WAVE para la ola en la web 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Wave from 'react-wavify'
+// IMPORT Carousel OF PRIMERA REACT
+import { Carousel } from 'primereact/carousel';       
+// import axios para las consultas al server
+import Axios from "axios";
+// import BUTTON PRIMERA REACT
+import { Button } from "primereact/button";
+// import TAG primera REACT
+import { Tag } from 'primereact/tag';
 
 export const Index = ()=> {
+
+      const responsiveOptions = [
+          {
+              breakpoint: '1199px',
+              numVisible: 1,
+              numScroll: 1
+          },
+          {
+              breakpoint: '991px',
+              numVisible: 2,
+              numScroll: 1
+          },
+          {
+              breakpoint: '767px',
+              numVisible: 1,
+              numScroll: 1
+          }
+      ];
 
       useEffect(() => {
         AOS.init();
       }, [])
 
+      const [popular, setPopular] = useState([]); 
+
+      useEffect(() => { 
+        Axios.get('http://localhost:3000/getProductsPopular')
+        .then((res) => { 
+          setPopular(res.data);     
+        })    
+        .catch((err)=>{console.log(err)}) 
+    
+      }, []);
+
+      const status = (product) => {
+        switch (product.estado) {
+          case 'disponible':
+            return 'success';
+          case 'agotado':
+              return 'warning';      
+          default:
+            return null; 
+        }
+      };
+
+      
+    const productTemplate = (product) => {
+      return (
+          <div className="bg-white border-1 surface-border border-round m-2 text-center py-5 px-3">
+              <div className="mb-3">
+                  <img src={`../assets/img/populares/${product.routeImg}`}  className="w-6 shadow-2" />
+              </div>
+              <div>
+                  <h4 className="mb-1">{product.nameProduct}</h4>
+                  <h6 className="mt-0 mb-3">${product.price}</h6>
+                  <Tag value={product.estado} seversity={status(product)}></Tag>
+                  <div className="mt-5 flex flex-wrap gap-2 justify-content-center">
+                      <Button icon="pi pi-search" className="p-button p-button-rounded" />
+                      <Button icon="pi pi-star-fill" className="p-button-success p-button-rounded" />
+                  </div>
+              </div>
+          </div>
+      );
+  };
+
+
     return (
     <>
     <head>    
-        <title>INTIMO</title>
+        <title>INTI SHOP</title>
         <link rel="stylesheet" href="../assets/css/web/bootstrap.css" />
         <link rel="stylesheet" href="../assets/css/web/styles.css" />
     </head>
@@ -62,8 +131,6 @@ export const Index = ()=> {
       </div>
     </header>
    {/* <!-- End Header --> */}
-
-
     <section id="hero">
       
     <div className="container">
@@ -359,84 +426,28 @@ export const Index = ()=> {
 
       </div>
     </section> 
-    {/* <!-- ======= Gallery Section ======= --> */}
+    {/* <!-- ======= MORE POPULY ======= --> */}
     <section id="gallery" className="gallery">
       <div className="container">
 
-        <div className="section-title" data-aos="fade-up">
-          <h2>Gallery</h2>
-          <p>Check our Gallery</p>
+        <div className="section-title" data-aos="fade-up">         
+          <p> + Populares</p>
+        </div>
+     </div>
+        <div className="card bg-dark" >
+            <Carousel value={popular} 
+              numVisible={3} 
+              numScroll={1} 
+              responsiveOptions={responsiveOptions} 
+              className="custom-carousel" 
+              circular
+              autoplayInterval={2000} 
+              itemTemplate={productTemplate} 
+            />
         </div>
 
-        <div className="row g-0" data-aos="fade-left">
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="100">
-              <a href="../assets/img/web/gallery/gallery-1.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-1.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="150">
-              <a href="../assets/img/web/gallery/gallery-2.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-2.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-              <a href="../assets/img/web/gallery/gallery-3.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-3.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="250">
-              <a href="../assets/img/web/gallery/gallery-4.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-4.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-              <a href="../assets/img/web/gallery/gallery-5.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-5.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="350">
-              <a href="../assets/img/web/gallery/gallery-6.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-6.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-              <a href="../assets/img/web/gallery/gallery-7.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-7.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-          <div className="col-lg-3 col-md-4">
-            <div className="gallery-item" data-aos="zoom-in" data-aos-delay="450">
-              <a href="../assets/img/web/gallery/gallery-8.jpg" className="gallery-lightbox">
-                <img src="../assets/img/web/gallery/gallery-8.jpg" alt="" className="img-fluid"/>
-              </a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+           
+         
     </section> 
 
     {/* <!-- ======= Testimonials Section ======= --> */}

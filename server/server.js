@@ -96,9 +96,6 @@ app.post('/insertProduct', (req, res) => {
             }              
       })
 })
-
-
-
 app.get('/editProduct', (req, res) => {
       res.send('editando product');
 
@@ -107,7 +104,6 @@ app.get('/deleteProduct', (req, res) => {
       res.send('borarando product');
 
 })
-
 app.post('/addCategory', (req, res) => {
        
       var values = [
@@ -122,3 +118,35 @@ app.post('/addCategory', (req, res) => {
       })
         
 } )
+app.get('/getProductsPopular', (req, res) => {      
+
+      con.query('SELECT * FROM  populares', (err,result)=> {
+          if( err ){
+            res.send("No se encontrarron productos porpulares ");           
+          }else{
+            res.send(result);    
+          }
+      })
+} )
+app.get('/allUsers', (req, res) => {      
+
+      con.query('SELECT * FROM  Login', (err,result)=> {
+           
+      })
+} )
+
+
+
+
+
+{/* <img src="../assets/img/web/gallery/gallery-1.jpg" alt="" className="img-fluid"/>
+                        
+<img src="../assets/img/web/gallery/gallery-5.jpg" alt="" className="img-fluid"/>
+
+
+
+<img src="../assets/img/web/gallery/gallery-6.jpg" alt="" className="img-fluid"/>
+
+
+
+<img src="../assets/img/web/gallery/gallery-7.jpg" alt="" className="img-fluid"/> */}
