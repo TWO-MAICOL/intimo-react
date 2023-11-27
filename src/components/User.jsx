@@ -13,14 +13,15 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext'; 
 // import axios para las consultas al server
 import Axios from "axios";
+// import Toast message ASND button
+import { Button } from 'primereact/button';
 
 export const User =  () => {
     // valid usuer for que pueda acceder
     if(!cookies.get('user')){
         window.location.href="./login";
     }
-
-    const [customers, setCustomers] = useState(null);
+    const [users, setUsers] = useState(null);
 
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -33,14 +34,12 @@ export const User =  () => {
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
         },
     });
-
-    const [selectedCustomer, setSelectedCustomer] = useState(null);
     
     useEffect(() => { 
         Axios.get('http://localhost:3000/allUsers')
         .then((res) => {
-            // setCustomers(res.data);
-            console.log(res);      
+            setUsers(res.data);
+            console.log(res.data);      
         })    
         .catch((err)=>{console.log(err)}) 
     
@@ -51,15 +50,38 @@ export const User =  () => {
         return (
         <div className="flex align-items-center gap-2">
             <img
-            alt={user.user}
-            src={`https://primefaces.org/cdn/primereact/images/avatar/${user.route}`}
+            alt={user.usuario}
+            src={'../assets/img/products/avatar.png'}
             width="32"
             />
-            <span>{user.user}</span>
+            <span>{user.usuario}</span>
         </div>
         );
     };
- 
+     // PANTILLA DE ACCIONES CAMPO
+    const templateAccions = (user) => {
+        return (
+            <div className="col-md-12">              
+             <button 
+                value={user.id} 
+                onClick={deleteUser} 
+                className=" col-md-3 mr-2 btn btn-danger rounded-4 p-3">Eliminar
+            </button>         
+             
+             <button 
+                value={user.id} 
+                onClick={deleteUser} 
+                className=" col-md-3 mr-2 btn btn-warning rounded-4 p-3">Editar
+            </button>         
+             
+          </div>
+        );
+    };
+    // DELETED users
+    const deleteUser = (e) => {
+        console.log(e.target.value);
+    }
+    
     //   esta es la busqueda y sirve para realizar los filtros por usuario
     const renderHeader = () => {
         const value = filters['global'] ? filters['global'].value : '';
@@ -73,17 +95,25 @@ export const User =  () => {
         };
 
         return (
-        <span className="p-input-icon-left">
-            <i className="pi pi-search" />
-            <InputText
-            type="search"
-            value={value || ''}
-            onChange={(e) => onGlobalFilterChange(e)}
-            placeholder="buscar"
-            />
-            <button>hola</button>
-        </span>
-        
+
+        <div className="col-md-12">
+            <span className="p-input-icon-left col-md-5">
+                <i className="pi pi-search" />
+                <InputText
+                type="search"
+                value={value || ''}
+                onChange={(e) => onGlobalFilterChange(e)}
+                placeholder="buscar"
+                />
+                
+                <Button 
+                className=" col-md-5 ml-3 " 
+                // onClick={addCategory} 
+                label="Agregar" 
+                rounded
+                />                   
+             </span>        
+        </div>
         );
     };
 
@@ -91,7 +121,7 @@ export const User =  () => {
 
     return (
         <>    
-         <title> Usuarios </title> 
+         <title>Usuarios</title> 
     
           <Menu/>
            
@@ -100,29 +130,21 @@ export const User =  () => {
              <div className="container-fluid py-4 mt-2 "> 
                 <div className="card">
                     <DataTable
-                        value={customers}
+                        value={users}
                         paginator
                         rows={5}
                         header={header}
                         filters={filters}
                         onFilter={(e) => setFilters(e.filters)}
-                        selection={selectedCustomer}
-                        onSelectionChange={(e) => setSelectedCustomer(e.value)}
+                        // selection={selectedCustomer}
+                        // onSelectionChange={(e) => setSelectedCustomer(e.value)}
                         selectionMode="single"
                         dataKey="id"
-                        stateStorage="session"
+                        // stateStorage="session"
                         stateKey="dt-state-demo-local"
                         emptyMessage="No customers found."
                         tableStyle={{ minWidth: '50rem' }}
-                    >
-                        <Column
-                        field="id"
-                        header="ID"
-                        sortable
-                        //   filter
-                        filterPlaceholder="Search"
-                        style={{ width: '25%' }}
-                        ></Column>
+                    >                        
                         <Column
                         header="USUARIO"
                         body={templateUser }
@@ -136,14 +158,23 @@ export const User =  () => {
                         style={{ width: '25%' }}
                         ></Column>
                         <Column
-                        field="status"
+                        field="contrasena"
                         header="CONTRASEÑA"
                         //   body={statusBodyTemplate}
                         sortable
                         //   filter
                         filterMenuStyle={{ width: '14rem' }}
                         style={{ width: '25%' }}
-                        ></Column>
+                        ></Column>    
+                        <Column
+                        field="id"
+                        header="ID"
+                        sortable
+                        //   filter
+                        body={templateAccions}
+                        filterPlaceholder="Search"
+                        style={{ width: '25%' }}
+                        ></Column>                    
                     </DataTable>
                 </div>               
              </div>           

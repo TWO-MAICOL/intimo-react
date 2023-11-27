@@ -129,9 +129,14 @@ app.get('/getProductsPopular', (req, res) => {
       })
 } )
 app.get('/allUsers', (req, res) => {      
-
+      
       con.query('SELECT * FROM  Login', (err,result)=> {
-           
+           if(err){
+               res.send("No se encontraron usuarios ");   
+           }else{
+               res.send(result);
+           }
+
       })
 } )
 

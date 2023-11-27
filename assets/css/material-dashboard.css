@@ -10886,6 +10886,9 @@ fieldset:disabled .btn {
 .rounded-3 {
   border-radius: 0.5rem !important;
 }
+.rounded-4 {
+  border-radius: 6rem !important;
+}
 
 .rounded-circle,
 .avatar.rounded-circle img {

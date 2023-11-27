@@ -22,7 +22,8 @@ const cookies = new Cookies();
 import "primereact/resources/themes/lara-light-indigo/theme.css";          
 import "primereact/resources/primereact.min.css";  
 // template styels
-import '../assets/css/material-dashboard.css'
+import '../../assets/css/material-dashboard.css'
+ 
 //  stylos importantes PrimeraReact
 import  'primeflex/primeflex.css'
 
