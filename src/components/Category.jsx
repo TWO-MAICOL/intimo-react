@@ -29,7 +29,18 @@ export const Category = () => {
   useEffect(() => {
     Axios.get('http://localhost:3000/getCategories')
        .then((res)=>{
-          setlistCategory(res.data.map(e => <li href="">{e.nombre}</li> ));             
+          setlistCategory(res.data.map(e => <li href="">{e.nombre}  
+          <Button 
+            className=" col-md-2 mt-2 me-5" 
+            // // onClick={addCategory} 
+            label="Eliminar" 
+            severity="danger"
+            text
+            style={{padding:0}}
+            
+         />         
+          
+        </li> ));             
        })    
        .catch((err)=>{console.log(err)}) 
   }, []);  
