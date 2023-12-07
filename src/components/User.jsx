@@ -79,7 +79,10 @@ export const User =  () => {
     };
     // DELETED users
     const deleteUser = (e) => {
-        console.log(e.target.value);
+        // Axios.post('http://localhost:3000/sendMessage',{request:'daño impreora'})
+        // .then(() => {console.log("message send");})
+        // .catch((err) =>{console.log(err);})       
+        
     }
     
     //   esta es la busqueda y sirve para realizar los filtros por usuario

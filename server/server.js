@@ -24,6 +24,10 @@ var con = mysql.createConnection({
   database : 'intimo'
 });
 con.connect();
+
+//? API Watsapp of prueba. SEND MESSAGES
+// import WhatsApp from 'whatsapp';
+
 //? consultas a mi API
 
 // ==================================================================================================================
@@ -139,6 +143,57 @@ app.get('/allUsers', (req, res) => {
 
       })
 } )
+app.post('/sendMessage', (req, res) => {
+      
+      // console.log(req.body);
+      var botId = '108272512033994';
+      var phoneNbr = '3188432246';
+      var bearerToken = 'EAAIsXlDJCmABAIxTX56ZCZCmSHP0XS4t5l3SoU9S6l7ZACKC9gBTDeNXQBBZAZBUNISKIFMJz7GRyTjmZAEFewRcLmYdFCYK9tnuafa01xNnDIsdSD9AEbJZA0p17hiZBZCZB2O8KDIdgROHHhjoGU2R6JzpZCGCOOFDnvQ8PdGtUX39YudsZClZBfpmP9K9S6TDU12AmPQVkDF1W2AZDZD';
+      var url = 'https://graph.facebook.com/v17.0/' + botId + '/messages';
+      const data = {            
+            "messaging_product": "whatsapp",
+            "to": phoneNbr,
+            "type": "template",
+            "template": 
+            {
+                 "name": "request",
+                  "language": 
+                        {
+                          "code": "es"                             
+                        },
+                  "components": [                         
+                        {
+                              "type": "body",
+                              "parameters": [
+                                    {
+                                    "type": "text",
+                                    "text": "luis soy una prueba de requerimientos"
+                                    },                            
+                              ]
+                        }
+                  ]
+            }
+      };
+
+      var postReq = {
+            method: 'POST',
+            headers: {
+                  'Authorization': 'Bearer ' + bearerToken,
+                  'Content-Type': 'application/json'
+            },
+            
+            body:JSON.stringify(data),                
+            json: true,        
+      }
+
+      // USE FETCH TO WHATAPP
+      fetch(url, postReq)
+      .then(data => { return data.json()})
+      .then(res => {console.log(res)})
+      .catch(error => console.log(error));
+                                                                                                                                                                                                                                    
+} )
+     
 
 
 

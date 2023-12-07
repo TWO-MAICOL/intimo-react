@@ -9,3 +9,6 @@ Currently, two official plugins are available:
 
 convierte en texto 
  JSON.stringify(selected)
+
+# TASK  USER
+- Consulta API todos los usuarios
