@@ -2,7 +2,7 @@
 import {Navbar} from './Navbar.jsx'
 import {Menu} from './Menu.jsx'
 import {Footer} from './Footer.jsx'//  view of data primeraReact 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef} from "react";
 //  inicio of session
 import Cookies from "universal-cookie";
 const cookies = new Cookies(); 
@@ -15,6 +15,10 @@ import { InputText } from 'primereact/inputtext';
 import Axios from "axios";
 // import Toast message ASND button
 import { Button } from 'primereact/button';
+//  imiport modal  add usuer
+import { ModalUser } from '../components/ModalUser.jsx';
+// import TOAST primera react library
+import { Toast } from 'primereact/toast';
 
 export const User =  () => {
     // valid usuer for que pueda acceder
@@ -43,8 +47,8 @@ export const User =  () => {
         })    
         .catch((err)=>{console.log(err)}) 
     
-      }, []);
-    
+      }, []); 
+
      // es como se ve el usuario el carga la consulta a node
     const templateUser = (user) => {
         return (
@@ -75,13 +79,26 @@ export const User =  () => {
             </button>         
              
           </div>
-        );
+        )
     };
     // DELETED users
     const deleteUser = (e) => {
-        // Axios.post('http://localhost:3000/sendMessage',{request:'daño impreora'})
-        // .then(() => {console.log("message send");})
-        // .catch((err) =>{console.log(err);})       
+        var userDeleted = e.target.value;
+        console.log(e.target.value);
+
+        Axios.post('http://localhost:3000/deleteUser',{id:userDeleted})
+            .then((res) => {
+                toast.current.show({ 
+                    severity: 'success', 
+                    summary: ' Categoria guardada con exito', 
+                    detail: res.data ,
+                    life: 2000
+                  });
+                window.location.reload(false);
+                console.log(res);
+            
+            })
+            .catch((err) =>{console.log(err);})       
         
     }
     
@@ -109,12 +126,8 @@ export const User =  () => {
                 placeholder="buscar"
                 />
                 
-                <Button 
-                className=" col-md-5 ml-3 " 
-                // onClick={addCategory} 
-                label="Agregar" 
-                rounded
-                />                   
+             <ModalUser/>
+                             
              </span>        
         </div>
         );
@@ -122,8 +135,13 @@ export const User =  () => {
 
     const header = renderHeader();
 
+  // -----MESAAGE NOTIFICATION-----------------------------------------------------------------------------------
+  const toast = useRef(null);
+
     return (
         <>    
+        {/* PARA CARGAR LAS NOTIFICACIONES */}
+         <Toast ref={toast} />
          <title>Usuarios</title> 
     
           <Menu/>

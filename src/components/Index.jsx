@@ -91,10 +91,8 @@ export const Index = ()=> {
     <header id="header" className="fixed-top d-flex align-items-center header-scrolled header-transparent">
       <div className="container d-flex align-items-center justify-content-between">
 
-        <div className="logo">
+        <div className="logo">         
           <h1><a href="/"><span>Intimo </span></a></h1>
-          {/* <!-- Uncomment below if you prefer to use an image logo --> */}
-          {/* <a href="index.html"><img src="assets/img/logo.png" alt="" className="img-fluid"/></a> */}
         </div>
 
         <nav id="navbar" className="navbar">
@@ -136,7 +134,7 @@ export const Index = ()=> {
     <div className="container">
       <div className="row justify-content-between">
         <div className="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
-          <div data-aos="zoom-out">
+          <div data-aos="zoom-out" className='neon'>
             <h1>Bienvenido a nuestra <span>Sex Shop</span></h1>
             <h2>Tenemos gran variedad de productos y de muy buena calidad</h2>
             <div className="text-center text-lg-start">
@@ -152,9 +150,9 @@ export const Index = ()=> {
     </div>
     
     <Wave 
-      fill= 'rgba(127, 21, 189, 0.91)'    
+      fill= ' white'    
       paused={false}
-      style={{ display: 'flex' , position: 'absolute',bottom:0}}
+      style={{ display: 'flex' , position: 'absolute',bottom:0,opacity: .9 }}
       options={{
         height: 20,
         amplitude: 100,
@@ -614,8 +612,8 @@ export const Index = ()=> {
       <div className="container">
 
         <div className="section-title" data-aos="fade-up">
-          <h2>Pricing</h2>
-          <p>Check our Pricing</p>
+          <h2>Descuentos</h2>
+          <p>Mira nuestros descuentos</p>
         </div>
 
         <div className="row" data-aos="fade-left">

@@ -147,8 +147,8 @@ app.post('/sendMessage', (req, res) => {
       
       // console.log(req.body);
       var botId = '108272512033994';
-      var phoneNbr = '3188432246';
-      var bearerToken = 'EAAIsXlDJCmABAIxTX56ZCZCmSHP0XS4t5l3SoU9S6l7ZACKC9gBTDeNXQBBZAZBUNISKIFMJz7GRyTjmZAEFewRcLmYdFCYK9tnuafa01xNnDIsdSD9AEbJZA0p17hiZBZCZB2O8KDIdgROHHhjoGU2R6JzpZCGCOOFDnvQ8PdGtUX39YudsZClZBfpmP9K9S6TDU12AmPQVkDF1W2AZDZD';
+      var phoneNbr = '3177680135';
+      var bearerToken = 'EAAIsXlDJCmABO3HQtMvrKmDYxzSIcuH7Xwq0dTrOb9kGSFZAhzPx4nCVBu72SR0ZCZCUX9MrBlMYWtPFke9XpetcqKo1B3xSgBRpuIzgel3v2RZBIRf0CpqnYlEVmZABnV1usxHZCIDoJYBydxn8hFUv5Q2nFmNjTHcr8hUtK8osNZAnmmZBw0klxDRiHR2ZCvL8rXC9ULD6kObtV3SLgYRDwnJNsGZAwM3szrYv0ZD';
       var url = 'https://graph.facebook.com/v17.0/' + botId + '/messages';
       const data = {            
             "messaging_product": "whatsapp",
@@ -161,13 +161,24 @@ app.post('/sendMessage', (req, res) => {
                         {
                           "code": "es"                             
                         },
-                  "components": [                         
+                  "components": [       
+                        {
+                              "type": "header",
+                              "parameters": [
+                                  {
+                                      "type": "image",
+                                      "image": { 
+                                            "link": "https://sm.starmedica.co/public/img/logotiopo.png",
+                                          //   "filename": "LOGO" 
+                                      }		                        	
+                                  }]
+                          },                  
                         {
                               "type": "body",
                               "parameters": [
                                     {
                                     "type": "text",
-                                    "text": "luis soy una prueba de requerimientos"
+                                    "text": "Hola Angela para recordar que el dia de mañana 13/12/2023 tienes una cita"
                                     },                            
                               ]
                         }
@@ -193,8 +204,34 @@ app.post('/sendMessage', (req, res) => {
       .catch(error => console.log(error));
                                                                                                                                                                                                                                     
 } )
+app.post('/insertUser', (req, res) => {      
      
+      var values = [
+            req.body.user,
+            req.body.password
+      ]
+      con.query('INSERT INTO Login (usuario,contrasena) VALUES (?)',[values], (err,result)=> {
+           if(err){
+               res.send("No se inserto el usuario ");   
+           }else{
+               res.send(result);
+           }
 
+      })
+} )     
+app.post('/deleteUser', (req, res) => {      
+     
+      var id = req.body.id;     
+      console.log(id);
+      con.query('DELETE FROM Login WHERE id = ?', [id], (err,result)=> {
+           if(err){
+               res.send("No se elimino usuario ");   
+           }else{
+               res.send("usuario eliminado");
+           }
+
+      })
+} )
 
 
 

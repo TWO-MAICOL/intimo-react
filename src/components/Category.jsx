@@ -14,6 +14,8 @@ import Cookies from "universal-cookie";
 const cookies = new Cookies();
 // import axios para las consultas al server
 import Axios from "axios";
+// IMPORT react icons
+import { FiXCircle } from "react-icons/fi";
 
 export const Category = () => {
   
@@ -24,21 +26,18 @@ export const Category = () => {
   
   const [category, setCategory] = useState("");  
   const [listCategory, setlistCategory] = useState();
-  
+  const prueba = () => {
+    alert('eliminando');
+  }
   // load all categories 
   useEffect(() => {
     Axios.get('http://localhost:3000/getCategories')
        .then((res)=>{
           setlistCategory(res.data.map(e => <li href="">{e.nombre}  
-          <Button 
-            className=" col-md-2 mt-2 me-5" 
-            // // onClick={addCategory} 
-            label="Eliminar" 
-            severity="danger"
-            text
-            style={{padding:0}}
-            
-         />         
+           <FiXCircle 
+              onClick={prueba}  
+              style={{color:'red', marginLeft:'10px'}}     
+           />      
           
         </li> ));             
        })    
@@ -69,7 +68,7 @@ export const Category = () => {
     
   }
 
-  // -----MESAAGE-----------------------------------------------------------------------------------
+  // -----MESAAGE NOTIFICATION-----------------------------------------------------------------------------------
   const toast = useRef(null);
 
   return (

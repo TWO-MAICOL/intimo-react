@@ -1,7 +1,7 @@
 import React, { useState } from "react"; 
 import { NavLink } from 'react-router-dom';
 // ICON 
-import {  ImHome,ImPencil2,ImUsers,ImStopwatch,ImDice} from "react-icons/im";
+import { ImHome,ImPencil2,ImUsers,ImStopwatch,ImDice} from "react-icons/im";
 
 export const Menu = () => {
   // const [showMenu, setShowMenu] = useState(false);
