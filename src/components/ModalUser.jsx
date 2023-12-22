@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef} from "react";
 import { InputText } from 'primereact/inputtext'; 
 // import axios para las consultas al server
 import Axios from "axios";
@@ -6,6 +6,8 @@ import Axios from "axios";
 import { Button } from 'primereact/button';
 //  imiport modal primera Reac add usuer
 import { Dialog } from 'primereact/dialog';
+// import TOAST primera react library
+import { Toast } from 'primereact/toast';
 
 export const ModalUser =  () => {
        
@@ -18,19 +20,27 @@ export const ModalUser =  () => {
         var dataUser = {user:user, password:password};
 
        await Axios.post('http://localhost:3000/insertUser', dataUser)
-        .then()
+        .then( res => {
+            toast.current.show({ 
+                severity: 'success', 
+                summary: res.data, 
+                detail: res.data ,
+                life: 2000
+              });
+            window.location.reload(true);               
+        })
         .catch();
     }
     
+  // -----MESAAGE NOTIFICATION-----------------------------------------------------------------------------------
+  const toast = useRef(null);
+    
     return (
         <>
-            <Button 
-                className=" col-md-5 ml-3 " 
-                // onClick={addCategory} 
-                label="Agregar" 
-                rounded
-                onClick={() => setVisible(true)}
-                />   
+        {/* PARA CARGAR LAS NOTIFICACIONES */}
+        <Toast ref={toast} />
+
+           
 
          <div className="card flex justify-content-center">             
             <Dialog  header="Crear Usuario" visible={visible} style={{ width: '60vw' }} onHide={() => setVisible(false)}>            

@@ -38,17 +38,16 @@ export const User =  () => {
         constraints: [{ value: null, matchMode: FilterMatchMode.STARTS_WITH }],
         },
     });
-    
-    useEffect(() => { 
+// funcion encargada de renderisar la pagina para que este en tiempo real 
+    const updateUsers = () => {     
         Axios.get('http://localhost:3000/allUsers')
-        .then((res) => {
-            setUsers(res.data);
-            console.log(res.data);      
-        })    
-        .catch((err)=>{console.log(err)}) 
-    
-      }, []); 
-
+        .then((res) => {setUsers(res.data);})    
+        .catch((err)=>{console.log(err)})      
+    }  
+    useEffect(() => { 
+        updateUsers(); 
+      }, []);  
+ 
      // es como se ve el usuario el carga la consulta a node
     const templateUser = (user) => {
         return (
@@ -90,13 +89,12 @@ export const User =  () => {
             .then((res) => {
                 toast.current.show({ 
                     severity: 'success', 
-                    summary: ' Categoria guardada con exito', 
+                    summary: ' Usuario eliminado', 
                     detail: res.data ,
-                    life: 2000
+                    life: 3000
                   });
-                window.location.reload(false);
-                console.log(res);
-            
+                  updateUsers();               
+                 
             })
             .catch((err) =>{console.log(err);})       
         
@@ -179,6 +177,7 @@ export const User =  () => {
                         style={{ width: '25%' }}
                         ></Column>
                         <Column
+                        className='cenrter-column'
                         field="contrasena"
                         header="CONTRASEÑA"
                         //   body={statusBodyTemplate}
@@ -189,11 +188,11 @@ export const User =  () => {
                         ></Column>    
                         <Column
                         field="id"
-                        header="ID"
-                        sortable
+                        header="ACCIONES"
+                        // sortable
                         //   filter
                         body={templateAccions}
-                        filterPlaceholder="Search"
+                        // filterPlaceholder="Search"
                         style={{ width: '25%' }}
                         ></Column>                    
                     </DataTable>

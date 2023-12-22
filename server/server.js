@@ -210,11 +210,11 @@ app.post('/insertUser', (req, res) => {
             req.body.user,
             req.body.password
       ]
-      con.query('INSERT INTO Login (usuario,contrasena) VALUES (?)',[values], (err,result)=> {
-           if(err){
+      con.query('INSERT INTO Login (usuario,contrasena) VALUES (?)',[values], (err,result)=> {        
+            if(err){
                res.send("No se inserto el usuario ");   
            }else{
-               res.send(result);
+               res.send('Usuario insertado con  exito');
            }
 
       })
@@ -234,16 +234,4 @@ app.post('/deleteUser', (req, res) => {
 } )
 
 
-
-
-{/* <img src="../assets/img/web/gallery/gallery-1.jpg" alt="" className="img-fluid"/>
-                        
-<img src="../assets/img/web/gallery/gallery-5.jpg" alt="" className="img-fluid"/>
-
-
-
-<img src="../assets/img/web/gallery/gallery-6.jpg" alt="" className="img-fluid"/>
-
-
-
-<img src="../assets/img/web/gallery/gallery-7.jpg" alt="" className="img-fluid"/> */}
+ 

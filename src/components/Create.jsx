@@ -60,6 +60,7 @@ export const Create = () => {
     const data = new FormData();
     data.append('file',file);     
 
+// sube imagen a el servidor 
     Axios.post('http://localhost:3000/upload', data)
       .then(res =>{
 
@@ -67,14 +68,16 @@ export const Create = () => {
 
             toast.current.show({ 
               severity: 'success', 
-              summary: ' CARGANDO IMAGEN', 
-              detail: res.data ,
+              summary: res.data, 
+              // detail: res.data ,
               life: 2000
-            });
-            // window.location.reload(false);
-           
-          } else {
-            console.log('IMAGEN NO SUBIDA');
+            });           
+          } else { 
+            toast.current.show({ 
+              severity: 'error',  
+              summary: 'imagen no cargada',               
+              life: 2000
+            });  
             
           }
     });
@@ -96,10 +99,11 @@ export const Create = () => {
       .then(res =>{        
           toast.current.show({ 
             severity: 'success', 
-            summary: ' DATOS CARGADOS', 
-            detail: res.data ,
+            summary: res.data ,             
             life: 2000
           });
+          window.location.href = "/home";
+
       })
       
   }    

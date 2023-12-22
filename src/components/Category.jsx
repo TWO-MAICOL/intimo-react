@@ -26,23 +26,29 @@ export const Category = () => {
   
   const [category, setCategory] = useState("");  
   const [listCategory, setlistCategory] = useState();
+  // eliminar categorias
   const prueba = () => {
     alert('eliminando');
   }
-  // load all categories 
-  useEffect(() => {
+// funcion encargada de renderizar la web para que sea en tiempo real
+  const updateCategories = () => {
     Axios.get('http://localhost:3000/getCategories')
-       .then((res)=>{
-          setlistCategory(res.data.map(e => <li href="">{e.nombre}  
-           <FiXCircle 
-              onClick={prueba}  
-              style={{color:'red', marginLeft:'10px'}}     
-           />      
-          
-        </li> ));             
-       })    
-       .catch((err)=>{console.log(err)}) 
+    .then((res)=>{
+       setlistCategory(res.data.map(e => <li href="">{e.nombre}  
+        <FiXCircle 
+           onClick={prueba}  
+           style={{color:'red', marginLeft:'10px'}}     
+        />      
+       
+     </li> ));             
+    })    
+    .catch((err)=>{console.log(err)}) 
+  }
+  // load all categories apenas inicie la web
+  useEffect(() => {
+    updateCategories();
   }, []);  
+ 
 
   const addCategory = async (e) => {   
     e.preventDefault();
@@ -61,7 +67,7 @@ export const Category = () => {
             detail: res.data ,
             life: 2000
           });
-          window.location.reload(false); 
+          updateCategories();
 
       } )
       .catch( err => console.log(err));
