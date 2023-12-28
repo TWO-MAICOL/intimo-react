@@ -9,7 +9,7 @@ import { Dialog } from 'primereact/dialog';
 // import TOAST primera react library
 import { Toast } from 'primereact/toast';
 
-export const ModalUser =  () => {
+export const ModalUser =  ({name,funcionReload}) => {
        
     const [visible, setVisible] = useState(false);
     const [password, setPassword] = useState(false);
@@ -27,7 +27,8 @@ export const ModalUser =  () => {
                 detail: res.data ,
                 life: 2000
               });
-            window.location.reload(true);               
+              funcionReload
+                         
         })
         .catch();
     }
@@ -38,11 +39,18 @@ export const ModalUser =  () => {
     return (
         <>
         {/* PARA CARGAR LAS NOTIFICACIONES */}
-        <Toast ref={toast} />
-
-           
-
-         <div className="card flex justify-content-center">             
+        <Toast ref={toast} />  
+            
+                 
+         <div className="cardz flex justify-content-center">  
+            <div className="col-md-6">
+                <Button 
+                    className=" col-md-12"                
+                    label={name}
+                    rounded
+                    onClick={() => {setVisible(true) } } 
+                />
+            </div>            
             <Dialog  header="Crear Usuario" visible={visible} style={{ width: '60vw' }} onHide={() => setVisible(false)}>            
                  <div className="container-fluid py-4 mt-4  col-12">
                     <div className='row'> 

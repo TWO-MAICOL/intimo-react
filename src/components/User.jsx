@@ -81,16 +81,14 @@ export const User =  () => {
         )
     };
     // DELETED users
-    const deleteUser = (e) => {
-        var userDeleted = e.target.value;
-        console.log(e.target.value);
+    const deleteUser = async(e) => {
+        var userDeleted = e.target.value;      
 
-        Axios.post('http://localhost:3000/deleteUser',{id:userDeleted})
+        await Axios.post('http://localhost:3000/deleteUser',{id:userDeleted})
             .then((res) => {
                 toast.current.show({ 
                     severity: 'success', 
-                    summary: ' Usuario eliminado', 
-                    detail: res.data ,
+                    summary: res.data ,                    
                     life: 3000
                   });
                   updateUsers();               
@@ -115,18 +113,22 @@ export const User =  () => {
         return (
 
         <div className="col-md-12">
-            <span className="p-input-icon-left col-md-5">
-                <i className="pi pi-search" />
+            <div className="col-md-4">
                 <InputText
                 type="search"
                 value={value || ''}
                 onChange={(e) => onGlobalFilterChange(e)}
                 placeholder="buscar"
                 />
-                
-             <ModalUser/>
+             </div>        
                              
-             </span>        
+            
+                    <ModalUser 
+                        name={'agregar'} 
+                        funcionReload={updateUsers()}            
+                    />
+               
+                 
         </div>
         );
     };
